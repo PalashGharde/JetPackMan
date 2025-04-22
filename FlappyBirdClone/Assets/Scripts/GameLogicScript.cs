@@ -19,7 +19,7 @@ public class GameLogicScript : MonoBehaviour
         playerScore += score;
         textUI.text = playerScore.ToString();
 
-        if( playerScore % 2 == 0 && gamelevel<=10 )
+        if( playerScore % 3 == 0 && gamelevel<=10 )
         {
             gamelevel += 1;
             //Debug.Log("next Level");

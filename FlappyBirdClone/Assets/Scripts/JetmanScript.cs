@@ -10,6 +10,7 @@ public class JetmanScript : MonoBehaviour
     public Animator jetmanAnimator;
     public GameLogicScript gameLogic;
     public bool isJetmanAlive = true;
+    public GameObject bloodParticle;
 
     private float currentBoostStrength;
 
@@ -18,6 +19,7 @@ public class JetmanScript : MonoBehaviour
     void Start()
     {
         currentBoostStrength = boostStrength;
+        bloodParticle.SetActive(false);
     }
 
     // Update is called once per frame
@@ -46,6 +48,7 @@ public class JetmanScript : MonoBehaviour
     {
         if (collision.gameObject.layer == 6) 
         { 
+            bloodParticle.SetActive(true);
             isJetmanAlive = false;
             gameLogic.GameOver();
         }
