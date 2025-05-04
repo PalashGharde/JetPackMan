@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Logic
+  - PipeSpawner
+  - WoodDoor
+  - MetalDoor
   layers:
   - Default
   - TransparentFX

@@ -530,6 +530,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &656693336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 656693337}
+  m_Layer: 0
+  m_Name: BulletSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &656693337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656693336}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.53, y: 0.28, z: -10.598928}
+  m_LocalScale: {x: 3.3333333, y: 3.3333333, z: 3.3333333}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1134564610}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &712484583
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +733,7 @@ Transform:
   m_GameObject: {fileID: 842060337}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.24449532, y: 1.0060607, z: -200.32385}
+  m_LocalPosition: {x: 0.233, y: 1.0060607, z: -200.32385}
   m_LocalScale: {x: 0.10491688, y: 1, z: 0.07899342}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -820,12 +851,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -8681906587103775801, guid: 2753d7349b421394085f87191139c657, type: 3}
+  m_Sprite: {fileID: 568249147, guid: 90b6808356772af4abcd319d82549629, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.08, y: 5.4517536}
+  m_Size: {x: 8.812606, y: 6.39}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -845,6 +876,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2056915206}
+  - {fileID: 656693337}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1134564611
@@ -894,6 +926,8 @@ MonoBehaviour:
   gameLogic: {fileID: 945954607}
   isJetmanAlive: 1
   bloodParticle: {fileID: 2056915205}
+  bulletSpawner: {fileID: 656693336}
+  bullet: {fileID: 6557420966816029653, guid: 54ebf939bbb34bc4ab1b57118775beac, type: 3}
 --- !u!70 &1134564613
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1310,7 +1344,7 @@ GameObject:
   - component: {fileID: 1370934091}
   m_Layer: 0
   m_Name: PipeSpawner
-  m_TagString: Untagged
+  m_TagString: PipeSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

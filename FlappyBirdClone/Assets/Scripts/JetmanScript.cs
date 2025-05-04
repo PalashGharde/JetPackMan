@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class JetmanScript : MonoBehaviour
@@ -11,6 +13,8 @@ public class JetmanScript : MonoBehaviour
     public GameLogicScript gameLogic;
     public bool isJetmanAlive = true;
     public GameObject bloodParticle;
+    public GameObject bulletSpawner;
+    public GameObject bullet;
 
     private float currentBoostStrength;
 
@@ -25,9 +29,21 @@ public class JetmanScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (isJetmanAlive && Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            jetmanAnimator.SetBool("IsShooting", true);
+            StartCoroutine(ShootBullet());
+            
+        }
+        //else
+        //{
+        //    ;
+        //}
+
         if (isJetmanAlive && Input.GetKey(KeyCode.Space))  
         {
-            jetmanAnimator.SetBool("isRunning", true);
+            jetmanAnimator.SetBool("isBoosting", true);
 
             // Charge up boost while holding
             currentBoostStrength += boostChargeRate * Time.deltaTime;
@@ -38,16 +54,25 @@ public class JetmanScript : MonoBehaviour
         }
         else
         {
-            jetmanAnimator.SetBool("isRunning", false);
+            jetmanAnimator.SetBool("isBoosting", false);
             currentBoostStrength = boostStrength;
         }
+    }
+
+
+    public IEnumerator ShootBullet()
+    {
+        Instantiate(bullet, bulletSpawner.transform.position, bullet.transform.rotation);
+        yield return new WaitForSeconds(0.5f);
+        jetmanAnimator.SetBool("IsShooting", false);
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 6) 
-        { 
+        {
+            jetmanAnimator.SetBool("Died", true);
             bloodParticle.SetActive(true);
             isJetmanAlive = false;
             gameLogic.GameOver();

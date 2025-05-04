@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 4093518215498b2408437f1126aeb0f8
+guid: 250157973dfa72d4ab35f6411386e9e0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1456389904055074397
-    second: __jet_pack_man_no_weapon_white_helmet_standing_die_0
-  - first:
-      213: 4136865778685290142
-    second: __jet_pack_man_no_weapon_white_helmet_standing_die_1
-  - first:
-      213: 3337730614086245823
-    second: __jet_pack_man_no_weapon_white_helmet_standing_die_2
-  - first:
-      213: 7430154366918319031
-    second: __jet_pack_man_no_weapon_white_helmet_standing_die_3
-  - first:
-      213: -4059699750945847082
-    second: __jet_pack_man_no_weapon_white_helmet_standing_die_4
+      213: 4405297830623518684
+    second: bullet 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -138,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: __jet_pack_man_no_weapon_white_helmet_standing_die_0
+      name: bullet 1_0
       rect:
         serializedVersion: 2
-        x: 278
-        y: 64
-        width: 277
-        height: 520
+        x: 156
+        y: 0
+        width: 200
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,96 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5efaa5c6e2263410800000000000000
-      internalID: 1456389904055074397
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: __jet_pack_man_no_weapon_white_helmet_standing_die_1
-      rect:
-        serializedVersion: 2
-        x: 772
-        y: 127
-        width: 461
-        height: 370
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e96a106f189196930800000000000000
-      internalID: 4136865778685290142
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: __jet_pack_man_no_weapon_white_helmet_standing_die_2
-      rect:
-        serializedVersion: 2
-        x: 1413
-        y: 68
-        width: 510
-        height: 267
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fbd9e883f40025e20800000000000000
-      internalID: 3337730614086245823
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: __jet_pack_man_no_weapon_white_helmet_standing_die_3
-      rect:
-        serializedVersion: 2
-        x: 2108
-        y: 28
-        width: 516
-        height: 254
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7bbdb72b7063d1760800000000000000
-      internalID: 7430154366918319031
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: __jet_pack_man_no_weapon_white_helmet_standing_die_4
-      rect:
-        serializedVersion: 2
-        x: 2800
-        y: 28
-        width: 516
-        height: 254
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6d88122f59c09a7c0800000000000000
-      internalID: -4059699750945847082
+      spriteID: cdf1d146903c22d30800000000000000
+      internalID: 4405297830623518684
       vertices: []
       indices: 
       edges: []

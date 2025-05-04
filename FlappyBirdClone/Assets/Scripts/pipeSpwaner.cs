@@ -10,6 +10,7 @@ public class pipeSpwaner : MonoBehaviour
     public float lowestHeight = -4.39f;
     public float highestHeight = 1;
     public GameLogicScript gameLogicScript;
+    private int pipenum;
 
     void Start()
     {
@@ -36,6 +37,12 @@ public class pipeSpwaner : MonoBehaviour
     void SpawnPipe()
     {
         Instantiate(pipe, new Vector3(transform.position.x, Random.Range(lowestHeight, highestHeight)), transform.rotation);
+        pipenum += 1;
+    }
+
+    public int GetObstacleNum()
+    {
+        return pipenum % 10;
     }
 
     void UpdateSpawnRate()
