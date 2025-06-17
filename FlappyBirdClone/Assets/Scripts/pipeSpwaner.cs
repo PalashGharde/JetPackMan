@@ -11,6 +11,7 @@ public class pipeSpwaner : MonoBehaviour
     public float highestHeight = 1;
     public GameLogicScript gameLogicScript;
     private int pipenum;
+    private bool minigameStarted = false;
 
     void Start()
     {
@@ -28,10 +29,29 @@ public class pipeSpwaner : MonoBehaviour
         }
         else
         {
-            SpawnPipe();
-            timer = 0;
+            if (!minigameStarted)
+            {
+                SpawnPipe();
+                timer = 0;
+            }
         }
             
+    }
+
+    public void pauseSpawning()
+    {
+        minigameStarted = true;
+    }
+
+    public void resumeSpawning()
+    {
+        minigameStarted = false;
+    }
+
+    public bool isMinigameStarted()
+    {
+        return minigameStarted;
+
     }
 
     void SpawnPipe()

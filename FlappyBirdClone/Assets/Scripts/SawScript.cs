@@ -1,6 +1,7 @@
 using System;
 using System.Security.Cryptography;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,13 +14,21 @@ public class SawScript : MonoBehaviour
     public GameObject woodenDoor;
     public GameObject metalDoor;
     public pipeSpwaner pipeSpwanerLogic;
+    public string ObstacleType = "Temp";
+    public Minigame minigame;
+ 
+
+    //private bool minigameStarted = false;
 
     void Start()
     {
         woodenDoor.SetActive(false);
         metalDoor.SetActive(false);
+        ObstacleType = "Temp";
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameLogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<GameLogicScript>();
         pipeSpwanerLogic = GameObject.FindGameObjectWithTag("PipeSpawner").GetComponent<pipeSpwaner>();
+        minigame = GameObject.FindGameObjectWithTag("Minigame").GetComponent<Minigame>();
         SpawnObstacle();
         UpdateMoveSpeed();
     }
@@ -27,7 +36,45 @@ public class SawScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
+        if (!pipeSpwanerLogic.isMinigameStarted()) { 
+            transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
+        }
+        else
+        {
+            //int minigameStatus = minigame.IsMinigameEnded();
+            
+            //if (minigameStatus == 1)
+            //{
+            //    Debug.Log("minigameStatus                              :" + minigameStatus);
+            //    pipeSpwanerLogic.resumeSpawning();
+            //    Destroy(gameObject);
+            //}
+            //else if (minigameStatus == 2)
+            //{
+            //    Debug.Log("minigameStatus                              :" + minigameStatus);
+            //    pipeSpwanerLogic.resumeSpawning();
+            //}
+
+            switch (minigame.IsMinigameEnded())
+            {
+                case 1:
+                    {
+                        Debug.Log("minigameStatus                              : 1");
+                        pipeSpwanerLogic.resumeSpawning();
+                        Destroy(gameObject);
+                        break;
+                    }
+                case 2: 
+                    {
+                        Debug.Log("minigameStatus                              : 2");
+                        pipeSpwanerLogic.resumeSpawning();
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+
 
         if (transform.position.x < deadZone)
         {
@@ -39,7 +86,6 @@ public class SawScript : MonoBehaviour
     {
         bool chance = Random.Range(0f, 1f) <= 0.5f;
         int obsNum = pipeSpwanerLogic.GetObstacleNum();
-        Debug.Log("obsNum, chance" + obsNum + ", " + chance);
         
         switch (obsNum)
         {
@@ -48,48 +94,67 @@ public class SawScript : MonoBehaviour
             case 1:
                 break;
             case 2:
+                if (chance)
+                {
+                    woodenDoor.SetActive(true);
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    ObstacleType = "Wood";
+                }
                 break;
             case 3:
                 if (chance)
                 {
-                    woodenDoor.SetActive(true);
-                    break;
-                }
-                else
-                {
                     metalDoor.SetActive(true);
-                    break;
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    ObstacleType = "Metal";
                 }
-            case 4:
                 break;
-            case 5:
+            case 4:
                 if (chance)
                 {
                     woodenDoor.SetActive(true);
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    ObstacleType = "Wood";
                 }
+                break;
+            case 5:
                 break;
             case 6:
                 break;
             case 7:
                 if (chance)
                 {
-                    metalDoor.SetActive(true);
+                    woodenDoor.SetActive(true);
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    ObstacleType = "Wood";
                 }
                 break;
             case 8:
                 break;
             case 9:
-                if (chance)
-                {
-                    woodenDoor.SetActive(true);
-                }
-                else
+                //if (chance)
                 {
                     metalDoor.SetActive(true);
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    ObstacleType = "Metal";
                 }
                 break;
         }
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 7 && ObstacleType == "Wood")
+        {
+            woodenDoor.SetActive(false);
+        }
+        else if(collision.gameObject.layer == 8 && ObstacleType == "Metal")
+        {
+            //minigameStarted = true; 
+            //pipeSpwanerLogic.pauseSpawning();
+            minigame.StartMinigame(gameObject);
+        }    
     }
 
     void UpdateMoveSpeed()
@@ -104,34 +169,34 @@ public class SawScript : MonoBehaviour
                     moveSpeed = 3.0f;
                     break;
                 case 1:
-                    moveSpeed = 3.3f;
+                    moveSpeed = 3.2f;
                     break;
                 case 2:
-                    moveSpeed = 3.6f;
+                    moveSpeed = 3.4f;
                     break;
                 case 3:
-                    moveSpeed = 3.9f;
+                    moveSpeed = 3.6f;
                     break;
                 case 4:
-                    moveSpeed = 4.2f;
+                    moveSpeed = 3.8f;
                     break;
                 case 5:
-                    moveSpeed = 4.5f;
+                    moveSpeed = 4.0f;
                     break;
                 case 6:
-                    moveSpeed = 4.8f;
+                    moveSpeed = 4.2f;
                     break;
                 case 7:
-                    moveSpeed = 5.1f;
+                    moveSpeed = 4.4f;
                     break;
                 case 8:
-                    moveSpeed = 5.4f;
+                    moveSpeed = 4.6f;
                     break;
                 case 9:
-                    moveSpeed = 5.7f;
+                    moveSpeed = 4.8f;
                     break;
                 case 10:
-                    moveSpeed = 6.0f;
+                    moveSpeed = 5.0f;
                     break;
             }
         }

@@ -5,7 +5,6 @@ public class BulletScript : MonoBehaviour
 {
     public float bulletspeed;
     private Rigidbody2D rb;
-    public Sprite spark;
     public GameObject sparkParticle;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,7 +28,6 @@ public class BulletScript : MonoBehaviour
         {
             //gameObject.GetComponent<SpriteRenderer>().sprite = spark;
             sparkParticle.SetActive(true);
-            Debug.Log("Hit Obscacle");
             StartCoroutine(WaitForTime());
             Destroy(gameObject);
         }

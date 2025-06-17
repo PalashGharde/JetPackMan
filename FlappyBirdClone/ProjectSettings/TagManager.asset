@@ -8,6 +8,7 @@ TagManager:
   - PipeSpawner
   - WoodDoor
   - MetalDoor
+  - Minigame
   layers:
   - Default
   - TransparentFX
@@ -16,10 +17,10 @@ TagManager:
   - Water
   - UI
   - Pipes
-  - 
-  - 
-  - 
-  - 
+  - BulletWood
+  - BulletHack
+  - Lock slots
+  - Lock Pin
   - 
   - 
   - 

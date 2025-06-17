@@ -15,7 +15,9 @@ public class JetmanScript : MonoBehaviour
     public GameObject bloodParticle;
     public GameObject bulletSpawner;
     public GameObject bullet;
-
+    public GameObject hackingBullet;
+    private bool minigameStarted = false;
+    public GameObject flyingFloor;
     private float currentBoostStrength;
 
 
@@ -33,36 +35,65 @@ public class JetmanScript : MonoBehaviour
         if (isJetmanAlive && Input.GetKeyDown(KeyCode.LeftAlt))
         {
             jetmanAnimator.SetBool("IsShooting", true);
-            StartCoroutine(ShootBullet());
+            StartCoroutine(ShootBullet("Wood"));
             
+        }
+        if (isJetmanAlive && Input.GetKeyDown(KeyCode.C))
+        {
+            jetmanAnimator.SetBool("IsShooting", true);
+            StartCoroutine(ShootBullet("Hack"));
         }
         //else
         //{
         //    ;
         //}
+        if (!minigameStarted) { 
+            if (isJetmanAlive && Input.GetKey(KeyCode.Space))  
+            {
+                jetmanAnimator.SetBool("isBoosting", true);
 
-        if (isJetmanAlive && Input.GetKey(KeyCode.Space))  
-        {
-            jetmanAnimator.SetBool("isBoosting", true);
-
-            // Charge up boost while holding
-            currentBoostStrength += boostChargeRate * Time.deltaTime;
-            currentBoostStrength = Mathf.Clamp(currentBoostStrength, boostStrength, maxBoostStrength);
+                // Charge up boost while holding
+                currentBoostStrength += boostChargeRate * Time.deltaTime;
+                currentBoostStrength = Mathf.Clamp(currentBoostStrength, boostStrength, maxBoostStrength);
 
 
-            myRigidBody.linearVelocity = Vector2.up * currentBoostStrength;
+                myRigidBody.linearVelocity = Vector2.up * currentBoostStrength;
+            }
+            else
+            {
+                jetmanAnimator.SetBool("isBoosting", false);
+                currentBoostStrength = boostStrength;
+            }
         }
         else
         {
-            jetmanAnimator.SetBool("isBoosting", false);
-            currentBoostStrength = boostStrength;
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+
+
+            //    //if (gameLogic.UnlockLock () == 0)
+            //    //{
+            //    //    gameLogic.ResetLock();
+            //    //    StopMinigame();
+            //    //}
+                
+            //}
+            myRigidBody.linearVelocity = Vector2.up * 5f;
         }
     }
 
 
-    public IEnumerator ShootBullet()
+    public IEnumerator ShootBullet(string BulletType)
     {
-        Instantiate(bullet, bulletSpawner.transform.position, bullet.transform.rotation);
+        if(BulletType == "Wood")
+        {
+            Instantiate(bullet, bulletSpawner.transform.position, bullet.transform.rotation);
+        }
+        else if (BulletType == "Hack")
+        {
+            Instantiate(hackingBullet, bulletSpawner.transform.position, hackingBullet.transform.rotation);
+        }
+
         yield return new WaitForSeconds(0.5f);
         jetmanAnimator.SetBool("IsShooting", false);
     }
@@ -78,4 +109,27 @@ public class JetmanScript : MonoBehaviour
             gameLogic.GameOver();
         }
     }
+
+    public void StartMinigame()
+    {
+        minigameStarted = true;
+        flyingFloor.SetActive(true);
+        gameLogic.StartMinigame();
+        jetmanAnimator.SetBool("isBoosting", true);
+    }
+
+
+    public void StopMinigame()
+    {
+        minigameStarted = false;
+        flyingFloor.SetActive(false);
+        gameLogic.ResetLock();
+        jetmanAnimator.SetBool("isBoosting", false);
+    }
+
+    public bool IsMinigameEnded()
+    {
+        return !minigameStarted;
+    }
+
 }
